@@ -20,29 +20,34 @@ var __extends = (this && this.__extends) || function (d, b) {
 var ts_graph = (function (_super) {
     __extends(ts_graph, _super);
     function ts_graph() {
-        var _this = this;
-        _super.apply(this, arguments);
-        // constructor() {
-        //     this.stage = new createjs.Stage('canvas');
-        //     this.obj = new createjs.Shape();
-        //     this.obj.graphics.beginFill('#ff9999').drawCircle(0,0,50);
-        //     this.obj.x = 100;
-        //     this.obj.y = 100;
-        //     this.stage.addChild(this.obj);
-        //     createjs.Ticker.framerate = 30;
-        //     createjs.Ticker.addEventListener('tick', this.handleTick);
-        // }
-        this.handleTick = function (event) {
-            _this.obj.x += 5;
-            if (_this.obj.x > _this.stage.canvas['width'])
-                _this.obj.x = 0;
-            _this.stage.update();
-            console.log("あほ");
-        };
+        _super.call(this);
+        this._shape = new Array();
     }
+    ts_graph.prototype.set_data = function (data) {
+        for (var i = 0; i < data.length; i++) {
+            this._shape[this._shape.length] = new createjs.Shape();
+            this._shape[this._shape.length].graphics.beginFill("#000000").drawRect(100, 100 + (data.length), 0, 0);
+        }
+    };
+    ts_graph.prototype.set_size = function (X, Y) {
+        this._canvas_size_X = X;
+        this._canvas_size_Y = Y;
+    };
     return ts_graph;
 })(createjs.Container);
 ;
+// drawRect ( x  y  w  h ) Graphics chainable
+// Defined in drawRect:860
+// Maps the familiar ActionScript drawRect() method to the functionally similar rect method.
+// Parameters:
+// x Number
+// y Number
+// w Number
+// Width of the rectangle
+// h Number
+// Height of the rectangle
+// Returns:
+// Graphics: The Graphics instance the method is called on (useful for chaining calls.) 
 /// <reference path="graph.ts"/>
 window.onload = function () {
     var gp = new ts_graph();
