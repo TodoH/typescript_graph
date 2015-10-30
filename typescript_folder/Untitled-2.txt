@@ -1,0 +1,17 @@
+class Cat {
+  length: number;
+  weight: number;
+  meow(): string;  // （1）
+  meow(s: string): string;  // （2）
+  meow(s?: any): string{  // （3）
+    if (typeof (s) == "string") {
+      return s;
+    } else {
+      return "にゃーん";
+    }
+  }
+  eat() {
+    this.length += 0.1;
+    this.weight += 0.1;
+  }
+}
