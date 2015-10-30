@@ -36,10 +36,11 @@ var ts_graph = (function (_super) {
     ts_graph.prototype.render = function () {
         for (var i = 0; i < this._data_length; i++) {
             this._shape[i] = new createjs.Shape();
-            this._shape[i].graphics.beginFill("#555555").drawRect(this._canvas_size_height - this._canvas_size_height / 10, //画面下10%マージン
-            (this._canvas_size_width / this._data_length) / 2 * (i + 1), //グラフを中心からずらす
-            (this._canvas_size_width / this._data.length) / 2, //グラフの横幅,画面の50%を占める 
-            -1 * (this._canvas_size_height / (this._range_max - this._range_min) * (this._data[i] - this._range_min))); //グラフの長さ
+            this._shape[i].graphics.beginFill("#555555").drawRect((this._canvas_size_width / this._data_length) * (i), this._canvas_size_height - this._canvas_size_height / 10, (this._canvas_size_width / this._data.length) / 2, -1 * (this._canvas_size_height / (this._range_max - this._range_min) * (this._data[i] - this._range_min)));
+            console.log(this._canvas_size_height - this._canvas_size_height / 10);
+            console.log((this._canvas_size_width / this._data_length) / 2 * (i + 1));
+            console.log((this._canvas_size_width / this._data.length) / 2);
+            console.log(-1 * (this._canvas_size_height / (this._range_max - this._range_min) * (this._data[i] + this._range_min)));
             this.addChild(this._shape[i]);
         }
     };
