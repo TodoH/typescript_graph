@@ -7,6 +7,7 @@ class ts_graph extends createjs.Container{
     private _range_max:number;
     private _data:number[];
     private _data_length:number;
+    private _waku :createjs.Shape =new createjs.Shape();
     constructor() {
         super();
         this._shape = new Array();
@@ -75,9 +76,12 @@ class ts_graph extends createjs.Container{
                 // console.log((this._canvas_size_width/this._data.length)/2);
                 // console.log(-1*(this._canvas_size_height/(this._range_max-this._range_min)*(this._data[i]+this._range_min)));
             }
-
-    }
-        
+this._waku.graphics.clear();
+this._waku.graphics.beginStroke("#555555").drawRect(1,1,this._canvas_size_width-2,this._canvas_size_height-2);
+this.addChild(this._waku);
+    }    
+    // waku
+          
 };
 
 //drawrectが重複してる

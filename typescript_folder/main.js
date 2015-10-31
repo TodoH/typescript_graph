@@ -8,6 +8,7 @@ var ts_graph = (function (_super) {
     __extends(ts_graph, _super);
     function ts_graph() {
         _super.call(this);
+        this._waku = new createjs.Shape();
         this._shape = new Array();
         this._data = new Array();
         this._canvas_size_height = 400;
@@ -61,6 +62,9 @@ var ts_graph = (function (_super) {
             console.log(this._shape[i]);
             this._shape[i].x = 0;
         }
+        this._waku.graphics.clear();
+        this._waku.graphics.beginStroke("#555555").drawRect(1, 1, this._canvas_size_width - 2, this._canvas_size_height - 2);
+        this.addChild(this._waku);
     };
     return ts_graph;
 })(createjs.Container);
@@ -78,13 +82,11 @@ window.onload = function () {
     g.setRange(0, 50); //グラフの範囲をセット（0 ~ 50）
     g.setSize(stage.canvas["height"], stage.canvas["width"]); //グラフの描画範囲をセット(width, height)
     g.render(); //グラフのレンダリング
-    stage.update();
     g.setData([10, 20, 30, 40, 50, 60]);
     g.setSize(300, 400);
     g.render();
-    stage.update();
     g.setData([10, 20, 60]);
-    g.setSize(600, 700);
+    g.setSize(600, 640);
     g.render();
     stage.update();
 };
