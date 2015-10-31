@@ -15,17 +15,19 @@ class ts_graph extends createjs.Container{
         this._canvas_size_width = 600;
         this._range_min = 0;
         this._range_max = 100;
+        // this._data_length=0;
         // var shape1:createjs.Shape= new createjs.Shape();
         // shape1.graphics.beginFill("#666666").drawRect(100,100,100,100);
         // this.addChild(shape1);
     }
-    public setData(data:number[]):void{
-        this._data=data;
-        for(var i=0;i<data.length;i++)console.log(data[i]);
-        this._data_length=data.length;
-        console.log(this._data_length);
+    public setData(data : number[] ){
+        this._data = data;
+        console.log(this._data);
+        for(var i = 0 ; i < data.length ; i++)console.log(data[i]);
+        // this._data_length = data.length;
+        // console.log(this._data_length);
     }
-    public setSize(height:number,width:number):void{
+    public setSize(height:number,width:number){
         this._canvas_size_height=height;
         this._canvas_size_width=width;
     }
@@ -33,20 +35,45 @@ class ts_graph extends createjs.Container{
         this._range_max=max;
         this._range_min=min;
     }
+    
     public render(){
-        for(var i = 0 ;i < this._data_length ; i++){
-            this._shape[i]=new createjs.Shape();
+        console.log(this._shape.length);
+        console.log(this._data.length);
+
+        //データサイズが足りない時の処理
+        if(this._shape.length<this._data.length){
+            for(var i=this._shape.length;i < this._data.length;i++){
+                
+                this._shape[i] = new createjs.Shape();
+                this.addChild(this._shape[i]);
+            }
+        }
+         
+        //データサイズが余る時の処理
+        if(this._shape.length>this._data.length){
+            for(var i=this._shape.length-1;i >= this._data.length;i--){
+                this._shape.pop();
+                this.removeChildAt(i);                
+            }                        
+        }
+        console.log(this._shape.length);
+        console.log(this._data.length);
+
+        for(var i = 0;i < this._data.length ; i++){
+
             this._shape[i].graphics.beginFill("#555555").drawRect(
-                (this._canvas_size_width/this._data_length)*(i),
+                (this._canvas_size_width/this._data.length)*(i),
                 this._canvas_size_height-this._canvas_size_height/10,
                 (this._canvas_size_width/this._data.length)/2, 
                 -1*(this._canvas_size_height/(this._range_max-this._range_min)*(this._data[i]-this._range_min)));
                 
-                console.log(this._canvas_size_height-this._canvas_size_height/10);
-                console.log((this._canvas_size_width/this._data_length)/2*(i+1));
-                console.log((this._canvas_size_width/this._data.length)/2);
-                console.log(-1*(this._canvas_size_height/(this._range_max-this._range_min)*(this._data[i]+this._range_min)));
-            this.addChild(this._shape[i]);
+                // console.log(this._canvas_size_height-this._canvas_size_height/10);
+                // console.log((this._canvas_size_width/this._data_length)/2*(i+1));
+                // console.log((this._canvas_size_width/this._data.length)/2);
+                // console.log(-1*(this._canvas_size_height/(this._range_max-this._range_min)*(this._data[i]+this._range_min)));
             }
-        }
+        
+
+    }
+        
 };
