@@ -55,12 +55,19 @@ var ts_graph = (function (_super) {
         console.log(this._shape.length);
         console.log(this._data.length);
         for (var i = 0; i < this._data.length; i++) {
+            // this._shape[i].x=
+            this._shape[i].graphics.clear();
             this._shape[i].graphics.beginFill("#555555").drawRect((this._canvas_size_width / this._data.length) * (i), this._canvas_size_height - this._canvas_size_height / 10, (this._canvas_size_width / this._data.length) / 2, -1 * (this._canvas_size_height / (this._range_max - this._range_min) * (this._data[i] - this._range_min)));
+            console.log(this._shape[i]);
+            this._shape[i].x = 0;
         }
     };
     return ts_graph;
 })(createjs.Container);
 ;
+//drawrectが重複してる
+//プロパティの変更がわからん・・・。
+//とりあえずクリアしといたろ。 
 /// <reference path="graph.ts"/>
 window.onload = function () {
     var stage = new createjs.Stage("canvas");
